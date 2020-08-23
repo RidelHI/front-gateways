@@ -1,0 +1,13 @@
+{
+  "bracketSpacing": true,
+  "endOfLine": "auto",
+  "printWidth": 120,
+  "proseWrap": "preserve",
+  "requireConfig": false,
+  "semi": true,
+  "singleQuote": true,
+  "stylelintIntegration": true,
+  "tabWidth": 2,
+  "trailingComma": "none",
+  "tslintIntegration": true
+}
