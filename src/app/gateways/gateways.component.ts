@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Gateway } from '../models/gateway';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { GatewaysService } from '../services/gateways.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gateways',
@@ -12,7 +13,11 @@ export class GatewaysComponent implements OnInit {
   displayedColumns: string[] = ['serialNumber', 'name', 'ipv4Address', 'devices'];
   gateways: Gateway[] = [];
 
-  constructor(private breakpointObserver: BreakpointObserver, private gatewaysService: GatewaysService) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private gatewaysService: GatewaysService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.fillGatewaysData();
@@ -24,7 +29,7 @@ export class GatewaysComponent implements OnInit {
     });
   }
 
-  redirectToUpdate(id: any) {}
-
-  redirectToDelete(id: any) {}
+  redirectToUpdate(id: any) {
+    this.router.navigate([`/admin/devices/${id}`]);
+  }
 }

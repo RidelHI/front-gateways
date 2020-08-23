@@ -1,1 +1,20 @@
-<p>devices works!</p>
+<div class="cards">
+  <mat-card *ngFor="let device of devices" class="card">
+    <mat-card-header> </mat-card-header>
+    <mat-card-content>
+      <div class="uid-row">
+        <p class="uid">UID: {{ device.uid }}</p>
+        <div class="status" [ngClass]="device.status === 'online' ? 'green' : 'red'"></div>
+      </div>
+
+      <div class="vend-row">
+        <p>Vendor: {{ device.vendor }}</p>
+        <p class="date">{{ device.createdDate }}</p>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-stroked-button color="accent">EDIT</button>
+      <button mat-stroked-button color="warn">REMOVE</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

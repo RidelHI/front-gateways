@@ -18,6 +18,10 @@ export class GatewaysService {
     return this.http.get(`${environment.BASE_API_URL}/gateways/${gatewayId}`);
   }
 
+  findDevicesByGatewayId(gatewayId: string) {
+    return this.http.get(`${environment.BASE_API_URL}/gateways/${gatewayId}/devices`);
+  }
+
   create(gateway: Gateway): Observable<any> {
     return this.http.post(`${environment.BASE_API_URL}/gateways`, gateway);
   }
