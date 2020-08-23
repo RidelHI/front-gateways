@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {BreakpointObserver} from '@angular/cdk/layout';
-import {GatewaysService} from '../services/gateways.service';
-import {Gateway} from '../models/gateway';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,22 +9,11 @@ import {Gateway} from '../models/gateway';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  displayedColumns: string[] = ['serialNumber', 'name', 'ipv4Address', 'devices'];
-  gateways: Gateway[] = [];
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+    map(result => result.matches),
+    shareReplay()
+  );
 
-  constructor(private breakpointObserver: BreakpointObserver, private gatewaysService: GatewaysService) {}
-
-  ngOnInit(): void {
-    this.fillGatewaysData();
-  }
-
-  fillGatewaysData() {
-    this.gatewaysService.findAll().subscribe((data: Gateway[]) => {
-      this.gateways = data;
-    });
-  }
-
-  redirectToUpdate(id: any) {}
-
-  redirectToDelete(id: any) {}
+  constructor(private breakpointObserver: BreakpointObserver) {}
+  ngOnInit(): void {}
 }

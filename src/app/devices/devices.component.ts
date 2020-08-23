@@ -12,8 +12,4 @@ export class DevicesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  fillDevices() {
-
-  }
-
 }
