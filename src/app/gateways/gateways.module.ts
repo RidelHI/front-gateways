@@ -3,19 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { GatewaysRoutingModule } from './gateways-routing.module';
 import { GatewaysComponent } from './gateways.component';
-import {MatTableModule} from '@angular/material/table';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { InsertEditGatewayComponent } from './insert-edit-gateway/insert-edit-gateway.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [GatewaysComponent],
-  imports: [
-    CommonModule,
-    GatewaysRoutingModule,
-    MatTableModule,
-    MatIconModule,
-    MatButtonModule
-  ]
+  declarations: [GatewaysComponent, InsertEditGatewayComponent],
+  imports: [CommonModule, GatewaysRoutingModule, MatTableModule, MatIconModule, MatButtonModule, MatDialogModule]
 })
-export class GatewaysModule { }
+export class GatewaysModule {}

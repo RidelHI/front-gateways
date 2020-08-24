@@ -1,3 +1,9 @@
+<div class="btn-add-container">
+  <button mat-mini-fab color="accent" aria-label="Add gateway" (click)="openDialog()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
 <div class="grid-container">
   <table mat-table [dataSource]="gateways" class="mat-elevation-z8">
     <!-- serialNumber Column -->
@@ -18,8 +24,17 @@
       <td mat-cell *matCellDef="let element">{{ element.ipv4Address }}</td>
     </ng-container>
 
+    <ng-container matColumnDef="update">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="accent" (click)="redirectToUpdate(element._id)">
+          <mat-icon class="mat-18">edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="devices">
-      <th mat-header-cell *matHeaderCellDef> View Devices </th>
+      <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
         <button mat-icon-button color="accent" (click)="redirectToUpdate(element._id)">
           <mat-icon class="mat-18">devices</mat-icon>
