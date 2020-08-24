@@ -6,6 +6,7 @@ import { GatewaysService } from '../services/gateways.service';
 import { Device } from '../models/device';
 import { GenericConfirmComponent } from '../shared/generic-confirm/generic-confirm.component';
 import { MatDialog } from '@angular/material/dialog';
+import { InsertEditDeviceComponent } from './insert-edit-device/insert-edit-device.component';
 
 @Component({
   selector: 'app-devices',
@@ -35,6 +36,34 @@ export class DevicesComponent implements OnInit {
   loadDevices() {
     this.gatewaysService.findDevicesByGatewayId(this.gatewayId).subscribe((data: Device[]) => {
       this.devices = data;
+    });
+  }
+
+  openDialog(device: Device) {
+    const dialogRef = this.dialog.open(InsertEditDeviceComponent, {
+      width: '600px',
+      data: device
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (!device) {
+          result.gatewayId = this.gatewayId;
+          this.devicesService.create(result).subscribe(
+            res => {
+              this.loadDevices();
+            },
+            error => console.log(error)
+          );
+        } else {
+          this.devicesService.update(result, device._id).subscribe(
+            res => {
+              this.loadDevices();
+            },
+            error => console.log(error)
+          );
+        }
+      }
     });
   }
 

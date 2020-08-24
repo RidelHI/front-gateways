@@ -1,3 +1,8 @@
+<div class="btn-add-container">
+  <button mat-mini-fab color="accent" aria-label="Add gateway" (click)="openDialog(null)">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
 <div class="cards">
   <mat-card *ngFor="let device of devices" class="card">
     <mat-card-header> </mat-card-header>
@@ -9,11 +14,11 @@
 
       <div class="vend-row">
         <p>Vendor: {{ device.vendor }}</p>
-        <p class="date">{{ device.createdDate }}</p>
+        <p class="date">{{ device.createdDate | date: 'dd/MM/yyyy' }}</p>
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-stroked-button color="accent">Edit</button>
+      <button mat-stroked-button color="accent" (click)="openDialog(device)">Edit</button>
       <button mat-stroked-button color="warn" (click)="openDialogRemove(device)">Remove</button>
     </mat-card-actions>
   </mat-card>

@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>{{ getAction() }} Gateway</h2>
+<mat-dialog-content [formGroup]="deviceForm" class="mat-typography">
+  <mat-form-field style="width: 100%" appearance="legacy" color="accent">
+    <mat-label>UID</mat-label>
+    <input matInput formControlName="uid" />
+    <mat-error *ngIf="!deviceForm.get('uid').valid && deviceForm.get('uid').touched">UID Number is required</mat-error>
+  </mat-form-field>
+  <mat-form-field style="width: 100%" appearance="legacy" color="accent">
+    <mat-label>Vendor</mat-label>
+    <input matInput formControlName="vendor" />
+    <mat-error *ngIf="!deviceForm.get('vendor').valid && deviceForm.get('vendor').touched"
+      >Vendor is required</mat-error
+    >
+  </mat-form-field>
+  <div class="date-container">
+    <mat-form-field appearance="fill" color="accent">
+      <mat-label>Select</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="online">online</mat-option>
+        <mat-option value="offline">offline</mat-option>
+      </mat-select>
+      <mat-error *ngIf="!deviceForm.get('status').valid && deviceForm.get('status').touched"
+        >Status is required</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field appearance="fill" color="accent">
+      <mat-label>Date Created</mat-label>
+      <input matInput [matDatepicker]="picker1" formControlName="createdDate" />
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+      <mat-error *ngIf="!deviceForm.get('createdDate').valid && deviceForm.get('createdDate').touched"
+        >Date Created is required</mat-error
+      >
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button [disabled]="!deviceForm.valid" mat-raised-button mat-dialog-close color="accent" (click)="save()">
+    {{ getAction() }}
+  </button>
+  <button mat-button [mat-dialog-close]="false" cdkFocusInitial>Cancel</button>
+</mat-dialog-actions>

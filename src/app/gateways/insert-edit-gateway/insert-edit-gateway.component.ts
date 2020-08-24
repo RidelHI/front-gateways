@@ -34,7 +34,6 @@ export class InsertEditGatewayComponent implements OnInit {
   }
 
   save() {
-    console.log(this.gatewaysForm.value);
     this.dialogRef.close(this.gatewaysForm.value);
   }
 

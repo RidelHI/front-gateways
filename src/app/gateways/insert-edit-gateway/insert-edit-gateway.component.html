@@ -21,7 +21,7 @@
   <div class="p-col-6">
     <mat-form-field style="width: 100%" appearance="legacy" color="accent">
       <mat-label>IPv4 address</mat-label>
-      <input matInput formControlName="ipv4Address" />
+      <input matInput placeholder="127.0.0.1" formControlName="ipv4Address" />
       <mat-error *ngIf="!gatewaysForm.get('ipv4Address').valid && gatewaysForm.get('ipv4Address').touched"
         >Valid IPv4 address is required</mat-error
       >
