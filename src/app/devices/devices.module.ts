@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { DevicesRoutingModule } from './devices-routing.module';
 import { DevicesComponent } from './devices.component';
-import {MatListModule} from '@angular/material/list';
-import {MatIconModule} from '@angular/material/icon';
-import {MatCardModule} from '@angular/material/card';
-import {MatButtonModule} from '@angular/material/button';
-
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [DevicesComponent],
@@ -17,7 +17,9 @@ import {MatButtonModule} from '@angular/material/button';
     MatListModule,
     MatIconModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+
+    SharedModule
   ]
 })
-export class DevicesModule { }
+export class DevicesModule {}
