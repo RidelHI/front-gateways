@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { InsertEditGatewayComponent } from './insert-edit-gateway/insert-edit-gateway.component';
 import { UtilService } from '../services/util.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-gateways',
@@ -21,7 +22,8 @@ export class GatewaysComponent implements OnInit {
     private gatewaysService: GatewaysService,
     private router: Router,
     public dialog: MatDialog,
-    private utilService: UtilService
+    private utilService: UtilService,
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -50,16 +52,30 @@ export class GatewaysComponent implements OnInit {
         if (!gateway) {
           this.gatewaysService.create(result).subscribe(
             res => {
+              this.toastrService.success('Gateway inserted correctly!', 'Success');
               this.loadGateways();
             },
-            error => console.log(error)
+            error => {
+              if (error.error.statusCode === 400) {
+                this.toastrService.error(error.error.message, 'Error');
+              } else {
+                this.toastrService.error('Gateway insert failed', 'Error');
+              }
+            }
           );
         } else {
           this.gatewaysService.update(result, gateway._id).subscribe(
             res => {
+              this.toastrService.success('Gateway updated correctly!', 'Success');
               this.loadGateways();
             },
-            error => console.log(error)
+            error => {
+              if (error.error.statusCode === 400) {
+                this.toastrService.error(error.error.message, 'Error');
+              } else {
+                this.toastrService.error('Gateway update failed', 'Error');
+              }
+            }
           );
         }
       }

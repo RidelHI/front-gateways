@@ -16,6 +16,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import {ToastrModule} from 'ngx-toastr';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent],
@@ -34,7 +35,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
-    MatTableModule
+    MatTableModule,
+
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
