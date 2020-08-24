@@ -8,6 +8,7 @@ import { GenericConfirmComponent } from '../shared/generic-confirm/generic-confi
 import { MatDialog } from '@angular/material/dialog';
 import { InsertEditDeviceComponent } from './insert-edit-device/insert-edit-device.component';
 import { UtilService } from '../services/util.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-devices',
@@ -25,7 +26,8 @@ export class DevicesComponent implements OnInit {
     private devicesService: DevicesService,
     private gatewaysService: GatewaysService,
     public dialog: MatDialog,
-    private utilService: UtilService
+    private utilService: UtilService,
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -54,16 +56,30 @@ export class DevicesComponent implements OnInit {
           result.gatewayId = this.gatewayId;
           this.devicesService.create(result).subscribe(
             res => {
+              this.toastrService.success('Device inserted correctly!', 'Success');
               this.loadDevices();
             },
-            error => console.log(error)
+            error => {
+              if (error.error.statusCode === 400) {
+                this.toastrService.error(error.error.message, 'Error');
+              } else {
+                this.toastrService.error('Device insert failed', 'Error');
+              }
+            }
           );
         } else {
           this.devicesService.update(result, device._id).subscribe(
             res => {
+              this.toastrService.success('Device updated correctly!', 'Success');
               this.loadDevices();
             },
-            error => console.log(error)
+            error => {
+              if (error.error.statusCode === 400) {
+                this.toastrService.error(error.error.message, 'Error');
+              } else {
+                this.toastrService.error('Device update failed', 'Error');
+              }
+            }
           );
         }
       }
@@ -79,10 +95,11 @@ export class DevicesComponent implements OnInit {
       if (result) {
         this.devicesService.deleteByGatewayId(this.gatewayId, device._id).subscribe(
           () => {
+            this.toastrService.success('Device removed correctly!', 'Success');
             this.loadDevices();
           },
           () => {
-            console.log('Error to delete device');
+            this.toastrService.error('Failed to remove device', 'Error');
           }
         );
       }
