@@ -23,26 +23,43 @@ export class GatewaysComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.fillGatewaysData();
+    this.loadGateways();
   }
 
-  fillGatewaysData() {
+  loadGateways() {
     this.gatewaysService.findAll().subscribe((data: Gateway[]) => {
       this.gateways = data;
     });
   }
 
-  redirectToUpdate(id: any) {
+  navigateToDevices(id: any) {
     this.router.navigate([`/admin/devices/${id}`]);
   }
 
-  openDialog() {
+  openDialog(gateway: Gateway) {
     const dialogRef = this.dialog.open(InsertEditGatewayComponent, {
-      width: '600px'
+      width: '600px',
+      data: gateway
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      if (result) {
+        if (!gateway) {
+          this.gatewaysService.create(result).subscribe(
+            res => {
+              this.loadGateways();
+            },
+            error => console.log(error)
+          );
+        } else {
+          this.gatewaysService.update(result, gateway._id).subscribe(
+            res => {
+              this.loadGateways();
+            },
+            error => console.log(error)
+          );
+        }
+      }
     });
   }
 }

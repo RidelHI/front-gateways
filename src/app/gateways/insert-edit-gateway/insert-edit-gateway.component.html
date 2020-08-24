@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Insert Gateway</h2>
+<h2 mat-dialog-title>{{ getAction() }} Gateway</h2>
 <mat-dialog-content [formGroup]="gatewaysForm" class="mat-typography">
   <div class="p-col-6">
     <mat-form-field style="width: 100%" appearance="legacy" color="accent">
@@ -29,6 +29,8 @@
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button [disabled]="!gatewaysForm.valid" mat-raised-button mat-dialog-close color="accent">Insert</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Cancel</button>
+  <button [disabled]="!gatewaysForm.valid" mat-raised-button mat-dialog-close color="accent" (click)="save()">
+    {{ getAction() }}
+  </button>
+  <button mat-button [mat-dialog-close]="false" cdkFocusInitial>Cancel</button>
 </mat-dialog-actions>

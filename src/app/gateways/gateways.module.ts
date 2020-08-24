@@ -24,6 +24,7 @@ import { MatInputModule } from '@angular/material/input';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule
-  ]
+  ],
+  entryComponents: [InsertEditGatewayComponent]
 })
 export class GatewaysModule {}

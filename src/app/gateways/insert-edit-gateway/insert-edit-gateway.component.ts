@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-insert-edit-gateway',
@@ -9,10 +11,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class InsertEditGatewayComponent implements OnInit {
   gatewaysForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private dialogRef: MatDialogRef<InsertEditGatewayComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
   ngOnInit(): void {
     this.buildForm();
+    if (this.data) {
+      this.gatewaysForm.patchValue(this.data);
+    }
   }
 
   buildForm() {
@@ -22,5 +31,17 @@ export class InsertEditGatewayComponent implements OnInit {
       name: ['', Validators.required],
       ipv4Address: ['', [Validators.required, Validators.pattern(ipPattern)]]
     });
+  }
+
+  save() {
+    console.log(this.gatewaysForm.value);
+    this.dialogRef.close(this.gatewaysForm.value);
+  }
+
+  getAction() {
+    if (this.data) {
+      return 'Edit';
+    }
+    return 'Insert';
   }
 }
