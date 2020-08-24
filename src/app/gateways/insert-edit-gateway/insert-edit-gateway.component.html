@@ -1,1 +1,34 @@
-<p>insert-edit-gateway works!</p>
+<h2 mat-dialog-title>Insert Gateway</h2>
+<mat-dialog-content [formGroup]="gatewaysForm" class="mat-typography">
+  <div class="p-col-6">
+    <mat-form-field style="width: 100%" appearance="legacy" color="accent">
+      <mat-label>Serial Number</mat-label>
+      <input matInput formControlName="serialNumber" />
+      <mat-error *ngIf="!gatewaysForm.get('serialNumber').valid && gatewaysForm.get('serialNumber').touched"
+        >Serial Number is required</mat-error
+      >
+    </mat-form-field>
+  </div>
+  <div class="p-col-6">
+    <mat-form-field style="width: 100%" appearance="legacy" color="accent">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error *ngIf="!gatewaysForm.get('name').valid && gatewaysForm.get('name').touched"
+        >Name is required</mat-error
+      >
+    </mat-form-field>
+  </div>
+  <div class="p-col-6">
+    <mat-form-field style="width: 100%" appearance="legacy" color="accent">
+      <mat-label>IPv4 address</mat-label>
+      <input matInput formControlName="ipv4Address" />
+      <mat-error *ngIf="!gatewaysForm.get('ipv4Address').valid && gatewaysForm.get('ipv4Address').touched"
+        >Valid IPv4 address is required</mat-error
+      >
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button [disabled]="!gatewaysForm.valid" mat-raised-button mat-dialog-close color="accent">Insert</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Cancel</button>
+</mat-dialog-actions>

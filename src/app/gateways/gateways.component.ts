@@ -37,7 +37,9 @@ export class GatewaysComponent implements OnInit {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(InsertEditGatewayComponent);
+    const dialogRef = this.dialog.open(InsertEditGatewayComponent, {
+      width: '600px'
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

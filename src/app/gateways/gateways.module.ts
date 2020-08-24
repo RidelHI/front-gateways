@@ -8,9 +8,22 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { InsertEditGatewayComponent } from './insert-edit-gateway/insert-edit-gateway.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [GatewaysComponent, InsertEditGatewayComponent],
-  imports: [CommonModule, GatewaysRoutingModule, MatTableModule, MatIconModule, MatButtonModule, MatDialogModule]
+  imports: [
+    CommonModule,
+    GatewaysRoutingModule,
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule
+  ]
 })
 export class GatewaysModule {}
