@@ -5,6 +5,7 @@ import { GatewaysService } from '../services/gateways.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { InsertEditGatewayComponent } from './insert-edit-gateway/insert-edit-gateway.component';
+import { UtilService } from '../services/util.service';
 
 @Component({
   selector: 'app-gateways',
@@ -19,10 +20,12 @@ export class GatewaysComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private gatewaysService: GatewaysService,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private utilService: UtilService
   ) {}
 
   ngOnInit(): void {
+    this.utilService.subjectSectionName.next('Gateways');
     this.loadGateways();
   }
 

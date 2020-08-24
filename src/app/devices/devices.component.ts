@@ -7,6 +7,7 @@ import { Device } from '../models/device';
 import { GenericConfirmComponent } from '../shared/generic-confirm/generic-confirm.component';
 import { MatDialog } from '@angular/material/dialog';
 import { InsertEditDeviceComponent } from './insert-edit-device/insert-edit-device.component';
+import { UtilService } from '../services/util.service';
 
 @Component({
   selector: 'app-devices',
@@ -23,10 +24,12 @@ export class DevicesComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private devicesService: DevicesService,
     private gatewaysService: GatewaysService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private utilService: UtilService
   ) {}
 
   ngOnInit(): void {
+    this.utilService.subjectSectionName.next('Devices');
     this.subscriptionActivatedRoute = this.activatedRoute.paramMap.subscribe(paramMap => {
       this.gatewayId = paramMap.get('id');
       this.loadDevices();
